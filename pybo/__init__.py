@@ -28,9 +28,9 @@ def create_app():
     
 
     # 블루프린트
-    from .views import main_views, question_views, answer_views
+    from .views import main_views, question_views, answer_views,user_views
     app.register_blueprint(main_views.bp)
     app.register_blueprint(question_views.bp)
     app.register_blueprint(answer_views.bp)
-    
+    app.register_blueprint(user_views.bp)
     return app
