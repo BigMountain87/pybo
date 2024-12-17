@@ -13,7 +13,7 @@ bp = Blueprint('answer', __name__, url_prefix='/answer')
 
 # '/create/<int:question_id>' 경로에 대한 POST 요청을 처리하는 함수
 # 실제로는 prefix 때문에 /answer/create/<int:question_id>,POST
-@bp.route('/create/<int:question_id>', method=('POST',))
+@bp.route('/create/<int:question_id>', methods=('POST',))
 def create(question_id):
     """
     특정 질문(Question)에 대한 답변(Answer)을 생성하는 함수
