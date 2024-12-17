@@ -3,8 +3,51 @@ from werkzeug.utils import redirect
 
 from pybo.models import db, Question, User
 
-
 bp = Blueprint('user', __name__, url_prefix='/user')
+
+@bp.route('/user_list',methods=['GET'])
+def user_list():
+    # 1. 전체 사용자 데이터를 가져오기
+    users = User.query.all()
+    
+    # 2. 가져온 데이터 JSON 형태로 변환
+    user_list = [] # 비어있는 리스트 배열 추가
+    for  user in users:
+        user_list.append({
+            'id': user.id,
+            'username' : user.username,
+            'email' : user.email
+        })
+
+    # 3. 클라이언트에 출력 return
+    return jsonify(user_list)
+
+
+
+#http://127.0.0.1:5000/user/delete_user/<id>
+@bp.route('/delete_user/<int:id>',methods=['DELETE'])
+def delete_user(id):
+    # 1. id로 DB를 조회해서 존재하는지 확인
+    # User를 id로 query를 한 후 user라는 변수 저장
+    user = User.query.get(id)
+
+    if not user:
+        return jsonify({"message":f"ID {id}인 사용자가 존재하지 않습니다."}), 404
+    # 2. DB에서 id에 해당하는 자료를 삭제
+    
+    try:
+        db.session.delete(user)
+        db.session.commit()
+        return jsonify({"message":f"사용자 ID {id}가 성공적으로 삭제되었습니다."}), 200
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({"message":"사용자 삭제중 에러가 발생했습니다.","error":str(e)}), 500
+    # 3. 삭제된 결과를 메시지 전송
+
+    # try, except 구문
+    # 어떤 작업을 실행 에러가나면 except 구문을 실행
+    # 예) DB에 삭제를 했는데 에러가 나면 except구문에 에러코드를 보여줌
+
 
 # 클라이언트
 # http://<주소>/user/create_user로 POST 방식 사용
