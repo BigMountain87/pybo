@@ -1,0 +1,12 @@
+<h1> {{ question.subject }} </h1>
+<div>
+    {{question.content}}
+</div>
+<!-- 답변 등록 버튼 -->
+<!-- Control+/ -> 주석 -->
+<!-- form 태그의 action 속성에 -->
+<!-- url_for('answer.create',question_id=question.id) -->
+<form action="{{ url_for('answer.create', question_id=question.id) }}" method="post">
+    <textarea name="content" id="content" rows="15"></textarea>
+    <input type="submit" value="답변등록">
+</form>
