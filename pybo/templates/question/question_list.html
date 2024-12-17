@@ -2,7 +2,11 @@
 {% if question_list %} <!-- python -->
     <ul> <!-- html -->
     {% for question in question_list %}<!-- python -->
-        <li><a href="/detail/{{ question.id }}/">{{ question.subject }}</a></li>
+    <li>
+        <!-- <li><a href="/detail/{{ question.id }}/">{{ question.subject }}</a></li> -->
+        <!-- 주소 : /detail/2 -->
+        <a href="{{ url_for('question.detail', question_id=question.id) }}">{{ question.subject }}</a></li>
+        <!-- 리다이렉션 question이라는 blueprint의 detail이라는 함수로 전달 -->
         <!-- html -->
     {% endfor %}<!-- python -->
     </ul><!-- html -->

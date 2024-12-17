@@ -1,4 +1,5 @@
-from flask import Blueprint, render_template
+from flask import Blueprint, render_template, url_for
+from werkzeug.utils import redirect
 
 from pybo.models import Question
 
@@ -10,9 +11,7 @@ def hello_pybo():
 
 @bp.route('/')
 def index():
-    # DB에서 쿼리로 조회 나온 결과를 question_list에 저장
-    question_list = Question.query.order_by(Question.create_date.desc())
-    return render_template('question/question_list.html', question_list=question_list)
+   return redirect(url_for('question._list'))
                                                            # 매개변수명 = DB에서조회한 결과
 # http://localhost:5000/detail/2/ 응답요청
 # URL 라우팅: '/detail/<int:question_id>/'에 요청이 오면 이 함수가 실행됨
