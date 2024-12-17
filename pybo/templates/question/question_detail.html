@@ -3,3 +3,31 @@
 <div>
     {{question.content}}
 </div>
+
+<!-- 답변을 등록하는 폼 -->
+<form action="{{ url_for('answer.create', question_id=question.id) }}" method="post">
+    <!-- 
+        action: 폼 데이터를 제출할 URL을 설정합니다.
+        {{ url_for('answer.create', question_id=question.id) }}:
+            Flask의 url_for 함수가 'answer.create' 라우트의 URL을 생성합니다.
+            question_id=question.id: 해당 질문의 ID를 URL 파라미터로 전달합니다.
+        method="post": 폼 데이터를 서버로 전송할 때 HTTP POST 메서드를 사용합니다.
+    -->
+
+    <!-- 답변 내용 입력 필드 -->
+    <textarea name="content" id="content" rows="15"></textarea>
+    <!-- 
+        <textarea>: 멀티라인 텍스트 입력을 받는 태그입니다.
+        name="content": 서버로 전송될 폼 데이터의 키 이름을 'content'로 설정합니다.
+        id="content": 이 태그의 식별자(HTML/CSS/JS에서 참조할 수 있음).
+        rows="15": 입력 상자의 세로 줄(row) 수를 15줄로 지정합니다.
+    -->
+
+    <!-- 제출 버튼 -->
+    <input type="submit" value="답변등록">
+    <!-- 
+        <input>: 폼 데이터를 제출하기 위한 버튼입니다.
+        type="submit": 버튼 클릭 시 폼 데이터를 서버로 전송합니다.
+        value="답변등록": 버튼에 표시될 텍스트를 '답변등록'으로 설정합니다.
+    -->
+</form>
