@@ -20,7 +20,7 @@ def index():
 def detail(question_id):
     # 데이터베이스에서 주어진 question_id에 해당하는 질문 데이터를 조회
     # Question은 데이터베이스 모델로, query.get()을 통해 해당 ID의 레코드를 가져옴
-    question = Question.query.get(question_id)
+    question = Question.query.get_or_404(question_id)
     
     # 조회된 질문 데이터를 question_detail.html 템플릿에 전달하여 렌더링
     # 'question' 변수로 템플릿에서 사용할 수 있게 전달
