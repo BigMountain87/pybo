@@ -1,0 +1,11 @@
+<!-- 질문 목록 -->
+{% if question_list %} <!-- python -->
+    <ul> <!-- html -->
+    {% for question in question_list %}<!-- python -->
+        <li><a href="/detail/{{ question.id }}/">{{ question.subject }}</a></li>
+        <!-- html -->
+    {% endfor %}<!-- python -->
+    </ul><!-- html -->
+{% else %}<!-- python -->
+    <p>질문이 없습니다.</p><!-- html -->
+{% endif %}<!-- python -->
